@@ -16,6 +16,7 @@ window.onload = function () {
   var dataScaleX = document.getElementById('dataScaleX');
   var dataScaleY = document.getElementById('dataScaleY');
 
+
   var options = {
         aspectRatio: 1.0,
         cropBoxResizable: false,
@@ -75,6 +76,10 @@ window.onload = function () {
 
   // Options
   actions.querySelector('.docs-toggles').onchange = function (event) {
+
+    var file = document.getElementById('modal-file');
+    file.innerHTML = lang+dig+"_"+roll;
+
     var e = event || window.event;
     var target = e.target || e.srcElement;
     var cropBoxData;
@@ -181,7 +186,7 @@ window.onload = function () {
 
             if (!download.disabled) {
               download.href = result.toDataURL('image/jpeg');
-              download.download = lang+dig+".jpg";
+              download.download = lang+dig+"_"+roll+".jpg";
             }
           }
 

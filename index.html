@@ -18,6 +18,7 @@
   <script>
     var lang = "E";
     var dig = "0";
+    var roll = "roll";
   </script>
 
 </head>
@@ -91,14 +92,20 @@
           </button>
         </div>
 
+        <br>
         <div class="btn-group">
           <div class="save_control">
 
+
+            <br>
+            Select Language:<br>
             <select class="btn btn-primary" onchange="onLanguageChange(this.value)">
               <option value="E">English</option>
               <option value="B">Bangla</option>
             </select>
 
+            <br>
+            Select Digit: <br>
             <select class="btn btn-primary" onchange="onDigitChange(this.value)">
               <option value="0">0</option>
               <option value="1">1</option>
@@ -111,27 +118,47 @@
               <option value="8">8</option>
               <option value="9">9</option>
             </select>
+
+
+            <br>
+            Your Roll: <br>
+            <input type="number" min="1" max="105" onkeyup="onRollChange(this.value)">
+
+
+            <hr>
+            <div class="btn-group btn-group-crop">
+              <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">
+            <span class="fa fa-download" data-toggle="tooltip" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">
+            </span>
+              </button>
+            </div>
           </div>
 
           <script>
             function onLanguageChange(value) {
               console.log("onLanguageChange "+value);
               lang = value;
+              var file = document.getElementById('modal-file');
+              file.innerHTML = lang+dig+"_"+roll;
             }
 
             function onDigitChange(value) {
               console.log("onDigitChange "+value);
               dig = value;
+              var file = document.getElementById('modal-file');
+              file.innerHTML = lang+dig+"_"+roll;
+            }
+
+            function onRollChange(val) {
+              console.log("roll "+ val);
+              roll=val;
+              var file = document.getElementById('modal-file');
+              file.innerHTML = lang+dig+"_"+roll;
             }
           </script>
         </div>
 
-        <div class="btn-group btn-group-crop">
-          <button type="button" class="btn btn-primary" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">
-            <span class="fa fa-download" data-toggle="tooltip" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">
-            </span>
-          </button>
-        </div>
+
 
 
         <!-- Show the cropped image in modal -->
@@ -139,9 +166,9 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
+                <div style="color: #0074d9" id="modal-file"> <strong>Go back & write your roll!</strong></div>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
-
 
 
               <div class="modal-body"></div>
